@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
-//import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom"
 function App() {
   const [alert, setAlert] = useState(null);
   //object
@@ -12,6 +17,10 @@ function App() {
       msg: message,
       type: type
     })
+    setTimeout(()=>{
+      setAlert(null);
+
+    },1500);
 
   }
 
@@ -35,13 +44,19 @@ function App() {
   }
   return (
     <>
-      <Navbar title='TextUtils' cmp1='About' mode={mode} toggleMode={toggleMode}></Navbar>
-      <Alert alert={alert}/>
-      <div className="container my-3">
-        <TextForm heading="Enter the text to analyze"></TextForm>
-        {/*<About></About>*/}
-
-      </div>
+      <BrowserRouter>
+        <Navbar title='TextUtilities' cmp1='About' mode={mode} toggleMode={toggleMode}></Navbar>
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Routes>
+            <Route path="/" element={<TextForm heading="Enter the text to analyze" showAlert={showAlert} mode={mode}></TextForm>
+}>
+            </Route>
+            <Route exact path="/about" element={<About />}>
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
 
     </>
   );
