@@ -17,10 +17,10 @@ function App() {
       msg: message,
       type: type
     })
-    setTimeout(()=>{
+    setTimeout(() => {
       setAlert(null);
 
-    },1500);
+    }, 1500);
 
   }
 
@@ -50,9 +50,9 @@ function App() {
         <div className="container my-3">
           <Routes>
             <Route path="/" element={<TextForm heading="Enter the text to analyze" showAlert={showAlert} mode={mode}></TextForm>
-}>
+            }>
             </Route>
-            <Route exact path="/about" element={<About />}>
+            <Route exact path="/about" element={<About mode={mode} />}>
             </Route>
           </Routes>
         </div>
